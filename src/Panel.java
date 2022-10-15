@@ -9,7 +9,7 @@ public class Panel extends JPanel {
     final int screenHeight = nodeSize * maxRow;
 
     Node[][] node = new Node[maxColumn][maxRow];
-    Node startingPointNode, currentPointNode , goalPointNode;
+    Node startingPointNode, currentPointNode , goalPointNode, solidNode;
     public Panel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -27,6 +27,7 @@ public class Panel extends JPanel {
         }
         setStartPointNode(0,1);
         setGoalPointNode(1,9);
+        setSolidNode(6,6);
     }
 
     private void setGoalPointNode(int col,int row){
@@ -38,6 +39,11 @@ public class Panel extends JPanel {
         node[col][row].setStartPoint();
         startingPointNode = node[col][row];
         currentPointNode = startingPointNode;
+    }
+
+    private void setSolidNode(int col,int row){
+        node[col][row].setSolid();
+        solidNode = node[col][row];
     }
 
 }

@@ -8,9 +8,9 @@ public class Node extends JButton implements ActionListener {
     Node parent;
     int column;
     int row;
-    int gCost;
-    int fCost;
-    int hfCost;
+    int gCost; //Distance between current node and start node
+    int fCost; //sum of g and f costs (G+H). its indicates the total distance cost from start to end
+    int hCost;//Distance between current node and goal(end) node
     boolean start;
     boolean goal;
     boolean solid;
@@ -37,6 +37,12 @@ public class Node extends JButton implements ActionListener {
         setForeground(Color.black);
         setText("Goal ! ");
         this.goal = true;
+    }
+
+    public void setSolid(){
+        setBackground(Color.DARK_GRAY);
+        setForeground(Color.GRAY);
+        solid = true;
     }
 
     private int getRow(){
