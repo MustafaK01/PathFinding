@@ -25,9 +25,30 @@ public class Node extends JButton implements ActionListener {
         addActionListener(this);
     }
 
+    public void setStartPoint(){
+        setBackground(Color.red);
+        setForeground(Color.white);
+        setText("Start Point");
+        this.start = true;
+    }
+
+    public void setGoalPoint(){
+        setBackground(Color.blue);
+        setForeground(Color.black);
+        setText("Goal ! ");
+        this.goal = true;
+    }
+
+    private int getRow(){
+        return this.row;
+    }
+    private int getColumn(){
+        return this.column;
+    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         setBackground(Color.yellow);
+        System.out.println(this.getRow() +" "+ this.getColumn());
     }
 }
