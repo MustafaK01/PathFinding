@@ -41,8 +41,23 @@ public class Node extends JButton implements ActionListener {
 
     public void setSolid(){
         setBackground(Color.DARK_GRAY);
-        setForeground(Color.GRAY);
+        setForeground(Color.DARK_GRAY);
         solid = true;
+    }
+
+    public void setToOpen(){
+        open = true;
+    }
+    public void setToChecked(){
+        if(!start && !goal){
+            setBackground(Color.ORANGE);
+            setForeground(Color.black);
+        }
+        checked = true;
+    }
+    public void setPath(){
+        setBackground(Color.green);
+        setForeground(Color.DARK_GRAY);
     }
 
     private int getRow(){
@@ -55,6 +70,6 @@ public class Node extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         setBackground(Color.yellow);
-        System.out.println(this.getRow() +" "+ this.getColumn());
+        System.out.println("Row: "+this.getRow() +" "+"Column: "+ this.getColumn());
     }
 }
