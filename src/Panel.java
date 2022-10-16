@@ -32,14 +32,19 @@ public class Panel extends JPanel {
             }
         }
         setStartPointNode(1,1);
-        setGoalPointNode(9,1);
+        setGoalPointNode(11,0);
         setSolidNode(6,0);
         setSolidNode(6,1);
         setSolidNode(6,2);
         setSolidNode(6,3);
         setSolidNode(6,4);
         setSolidNode(6,5);
+        setSolidNode(10,1);
+        setSolidNode(10,2);
         setSolidNode(6,6);
+        //setSolidNode(6,7);
+        setSolidNode(6,8);
+        setSolidNode(6,9);
         this.setCostsOfNodes();
     }
 
@@ -99,10 +104,10 @@ public class Panel extends JPanel {
             listOfChecked.add(currentPointNode);
             listOfOpen.remove(currentPointNode);
 
-            if(row-1>0){
+            if(row-1>=0){
                 openNode(node[col][row-1]);
             }
-            if(col-1>0){
+            if(col-1>=0){
                 openNode(node[col-1][row]);
             }
             if(col+1<maxColumn){
