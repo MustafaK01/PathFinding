@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Panel extends JPanel {
     final int maxColumn = 15;
@@ -14,6 +15,7 @@ public class Panel extends JPanel {
     ArrayList<Node> listOfOpen = new ArrayList<>();
     ArrayList<Node> listOfChecked = new ArrayList<>();
 
+    Random r = new Random();
     public Panel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -31,37 +33,47 @@ public class Panel extends JPanel {
                 row++;
             }
         }
-        setStartPointNode(1,1);
-        setGoalPointNode(11,0);
-        setSolidNode(6,0);
-        setSolidNode(6,1);
-        setSolidNode(6,2);
-        setSolidNode(6,3);
-        setSolidNode(6,4);
-        setSolidNode(6,5);
-        setSolidNode(10,1);
-        setSolidNode(10,2);
-        setSolidNode(6,6);
-        //setSolidNode(6,7);
-        setSolidNode(6,8);
-        setSolidNode(6,9);
+
+        setStartPointNode(r.nextInt(maxColumn-1),r.nextInt(maxRow));
+        setGoalPointNode(r.nextInt(maxColumn),r.nextInt(maxRow));
+        for (int i = 0; i < 60; i++) {
+            setSolidNode(r.nextInt(maxColumn),r.nextInt(maxRow-1));
+        }
+//        setSolidNode(6,0);
+//        setSolidNode(6,1);
+//        setSolidNode(6,2);
+//        setSolidNode(6,3);
+//        setSolidNode(6,4);
+//        setSolidNode(6,5);
+//        setSolidNode(10,1);
+//        setSolidNode(10,2);
+//        setSolidNode(6,6);
+//        //setSolidNode(6,7);
+//        setSolidNode(6,8);
+//        setSolidNode(6,9);
         this.setCostsOfNodes();
     }
 
     private void setGoalPointNode(int col,int row){
-        node[col][row].setGoalPoint();
-        goalPointNode = node[col][row];
+        if(!node[col][row].start&&!node[col][row].solid) {
+            node[col][row].setGoalPoint();
+            goalPointNode = node[col][row];
+        }
     }
 
     private void setStartPointNode(int col,int row){
-        node[col][row].setStartPoint();
-        startingPointNode = node[col][row];
-        currentPointNode = startingPointNode;
+        if(!node[col][row].goal&&!node[col][row].solid) {
+            node[col][row].setStartPoint();
+            startingPointNode = node[col][row];
+            currentPointNode = startingPointNode;
+        }
     }
 
     private void setSolidNode(int col,int row){
-        node[col][row].setSolid();
-        solidNode = node[col][row];
+        if(!node[col][row].goal&&!node[col][row].start){
+            node[col][row].setSolid();
+            solidNode = node[col][row];
+        }
     }
 
     private void getCost(Node node){
