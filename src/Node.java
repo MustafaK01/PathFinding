@@ -48,7 +48,6 @@ public class Node extends JButton implements ActionListener {
     public void setToOpen(){
         open = true;
     }
-
     public void setToChecked(){
         if(!start && !goal){
             setBackground(Color.ORANGE);
@@ -57,7 +56,7 @@ public class Node extends JButton implements ActionListener {
         checked = true;
     }
 
-    public void setToPath(){
+    public void setPath(){
         setBackground(Color.green);
         setForeground(Color.DARK_GRAY);
     }
@@ -70,5 +69,8 @@ public class Node extends JButton implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {}
+    public void actionPerformed(ActionEvent actionEvent) {
+        setBackground(Color.yellow);
+        System.out.println("Row: "+this.getRow() +" "+"Column: "+ this.getColumn());
+    }
 }
