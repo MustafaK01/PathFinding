@@ -3,8 +3,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel extends JPanel {
-    final int maxColumn = 15;
-    final int maxRow = 10;
+    final int maxColumn = 25;
+    final int maxRow = 20;
     final int nodeSize = 60;
     final int screenWidth = nodeSize*maxColumn;
     final int screenHeight = nodeSize * maxRow;
@@ -18,7 +18,8 @@ public class Panel extends JPanel {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setLayout(new GridLayout(maxRow,maxColumn));
-
+        this.addKeyListener(new KeyHandler(this));
+        this.setFocusable(true);
         int col = 0;
         int row = 0;
         while(col < maxColumn && row < maxRow){
@@ -31,8 +32,15 @@ public class Panel extends JPanel {
             }
         }
         setStartPointNode(1,1);
-        setGoalPointNode(1,9);
+        setGoalPointNode(9,1);
         setSolidNode(6,6);
+        setSolidNode(6,0);
+        setSolidNode(6,1);
+        setSolidNode(6,2);
+        setSolidNode(6,3);
+        setSolidNode(6,4);
+        setSolidNode(6,5);
+
         this.setCostsOfNodes();
     }
 
@@ -84,6 +92,7 @@ public class Panel extends JPanel {
     }
 
     public void searchGoalPoint(){
+        //while for auto search, it can be changed to 'if' if you don't want auto search
         while(!reached){
             int col = currentPointNode.column;
             int row = currentPointNode.row;
@@ -120,7 +129,19 @@ public class Panel extends JPanel {
             currentPointNode = listOfOpen.get(bestNodeIndex);
             if(currentPointNode == goalPointNode){
                 reached = true;
+                this.getThePath();
             }
+        }
+    }
+
+    public void getThePath(){
+        //it draws the path from goal point to start point
+        Node current = goalPointNode;
+        while(current!=startingPointNode){
+           current = current.parent;
+           if(current!=startingPointNode){
+               current.setToPath();
+           }
         }
     }
 
@@ -131,5 +152,14 @@ public class Panel extends JPanel {
             listOfOpen.add(node);
         }
     }
+
+//    public void setSolidByClick(Node node,int col,int row){
+//
+//        if(!node.solid){
+//            node.
+//        }
+//
+//    }
+
 
 }
