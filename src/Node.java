@@ -55,6 +55,7 @@ public class Node extends JButton implements ActionListener {
         }
         checked = true;
     }
+
     public void setPath(){
         setBackground(Color.green);
         setForeground(Color.DARK_GRAY);

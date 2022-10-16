@@ -18,6 +18,7 @@ public class Panel extends JPanel {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setLayout(new GridLayout(maxRow,maxColumn));
+
         int col = 0;
         int row = 0;
         while(col < maxColumn && row < maxRow){
@@ -29,7 +30,7 @@ public class Panel extends JPanel {
                 row++;
             }
         }
-        setStartPointNode(0,1);
+        setStartPointNode(1,1);
         setGoalPointNode(1,9);
         setSolidNode(6,6);
         this.setCostsOfNodes();
@@ -83,7 +84,7 @@ public class Panel extends JPanel {
     }
 
     public void searchGoalPoint(){
-        if(!reached){
+        while(!reached){
             int col = currentPointNode.column;
             int row = currentPointNode.row;
             currentPointNode.setToChecked();
@@ -124,7 +125,7 @@ public class Panel extends JPanel {
     }
 
     public void openNode(Node node){
-        if(!node.open&&!node.checked&&node.solid){
+        if( !node.open&& !node.checked && !node.solid){
             node.setToOpen();
             node.parent = currentPointNode;
             listOfOpen.add(node);
